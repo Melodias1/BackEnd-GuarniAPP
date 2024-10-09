@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import org.generation.guarniapp.controller.CategoriaController;
 import org.generation.guarniapp.model.Categoria;
-
+import org.springframework.stereotype.Service;
+@Service
 public class CategoriaService {
 private static final ArrayList<Categoria> lista = new ArrayList<Categoria>();
 
