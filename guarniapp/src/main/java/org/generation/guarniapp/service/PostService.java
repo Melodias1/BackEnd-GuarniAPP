@@ -47,7 +47,7 @@ public class PostService {
 	public Post updateProducto(Long id, String postDescription, String postFile, LocalDateTime postDate, String postTitle) {
 		Post p =null;
 		for (Post post : lista) {//Recorrer los elementos y encuentra uno
-			if(post.getId()==postId) {
+			if(post.getId()==id) {
 				if (postDescription != null) post.setPostDescription(postDescription);
 				if (postFile != null) post.setPostFile(postFile);
 				if (postDate != null) post.setPostDate(postDate);

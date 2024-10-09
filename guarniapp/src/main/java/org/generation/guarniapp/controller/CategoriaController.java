@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
+//se cambia @Restadvicecontroller por @Restcontroller
 @RequestMapping(path="/api/categoria/")
-@RestControllerAdvice
+@RestController
 public class CategoriaController {
 private final CategoriaService categoriaService;
 
@@ -30,8 +31,8 @@ public CategoriaController(CategoriaService categoriaService) {
 public ArrayList<Categoria> getCategoria(){
 	return categoriaService.getAllCategorias();
 }
-
-@GetMapping(path = "catId")
+//se agregan los {} para los catId en los path de los metodos
+@GetMapping(path = "{catId}")
 public Categoria getCategoria(@PathVariable("catId") Long catId ) {
 	return categoriaService.getCategoria(catId);
 }
@@ -39,11 +40,13 @@ public Categoria getCategoria(@PathVariable("catId") Long catId ) {
 public Categoria addCategoria(@RequestBody Categoria categoria) {
 	return categoriaService.addCategoria(categoria);
 }
-@DeleteMapping(path = "catId")
+@DeleteMapping(path = "{catId}")
 public Categoria deleteCategoria(@PathVariable("catId")Long catId) {
 	return categoriaService.deleteCategoria(catId);
 }
-@PutMapping(path = "catId")
+
+//se cambia @GetMapping por @PutMapping ya que causaba conflicto en la app ademas de qye  el metodo no cumpliria su funcion
+@PutMapping(path = "{catId}")
 public Categoria updateCategoria(@PathVariable("catId")Long catId,
 								@RequestParam(required = false) String	categoria,
 								@RequestParam(required = false) String	marcas) {
