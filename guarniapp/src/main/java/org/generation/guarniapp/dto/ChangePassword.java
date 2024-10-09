@@ -6,11 +6,13 @@ public class ChangePassword {
 	private String newPassword;
 	
 	//Getters and Setters
+	
 	public String getPassword() {
 		return Password;
 	}
+	//se le agrega se cambia por this.password
 	public void setPassword(String password) {
-		Password = password;
+		this.Password = password;
 	}
 	public String getNewPassword() {
 		return newPassword;

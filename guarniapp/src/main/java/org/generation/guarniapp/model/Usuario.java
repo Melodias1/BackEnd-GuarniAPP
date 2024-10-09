@@ -1,4 +1,4 @@
-package org.generation.guarniapp.model;
+	package org.generation.guarniapp.model;
 
 public class Usuario {
 	//Propiedades
