@@ -2,17 +2,17 @@ package org.generation.guarniapp.dto;
 
 public class ChangePassword {
 	//Propiedades
-	private String Password;
+	private String password;
 	private String newPassword;
 	
 	//Getters and Setters
 	
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	//se le agrega se cambia por this.password
 	public void setPassword(String password) {
-		this.Password = password;
+		this.password = password;
 	}
 	public String getNewPassword() {
 		return newPassword;
@@ -21,7 +21,7 @@ public class ChangePassword {
 		this.newPassword = newPassword;
 	}
 	public ChangePassword(String password, String newPassword) {
-		this.Password= password;
+		this.password= password;
 		this.newPassword = newPassword;
 	}//constructor
 
