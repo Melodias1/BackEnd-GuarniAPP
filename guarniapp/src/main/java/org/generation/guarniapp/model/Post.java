@@ -2,31 +2,37 @@ package org.generation.guarniapp.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "publicaciones")
 public class Post {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
 	private Long id;
 	private String postDescription;
 	private String postFile;
-	private LocalDateTime postDate;
+	@Column(nullable=false)
+	private String postDate;
 	private String postTitle;
 	
 	private static Long total = Long.valueOf(0);
 
-	public Post(String postDescription, String postFile, LocalDateTime postDate, String postTitle) {
+	public Post(String postDescription, String postFile, String postDate, String postTitle) {
 		super();
 		this.postDescription = postDescription;
 		this.postFile = postFile;
 		this.postDate = postDate;
 		this.postTitle = postTitle;
-		Post.total ++;
-		id = Post.total;
 	}//Constructor
 	
-	public Post() {
-		Post.total ++;
-		id = Post.total;
-	}//Constructor vacio
+	public Post() {}//Constructor vacio
 
 	public Long getId() {
 		return id;
@@ -52,11 +58,11 @@ public class Post {
 		this.postFile = postFile;
 	}//setPostFile
 
-	public LocalDateTime getPostDate() {
+	public String getPostDate() {
 		return postDate;
 	}//getPostDate
 
-	public void setPostDate(LocalDateTime postDate) {
+	public void setPostDate(String postDate) {
 		this.postDate = postDate;
 	}//setPostDate
 
