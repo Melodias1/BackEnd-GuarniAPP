@@ -1,16 +1,27 @@
 package org.generation.guarniapp.model;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="categoria")
 public class Categoria {
 
 //Propiedades
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@Column(name="Id", unique=true, nullable=false)
 private Long id;
 
 
+@Column(nullable=false)
 private String categoria;
-
+@Column(nullable=false)
 private String marcas;
 
-private static Long total = Long.valueOf(0);
+//private static Long total = Long.valueOf(0);
 
 
 public Long getId() {
@@ -40,14 +51,18 @@ public void setMarcas(String marcas) {
 public Categoria(String categoria, String marcas) {
 	this.categoria = categoria;
 	this.marcas = marcas;
-	Categoria.total++;
-	id = Categoria.total;
+	/*Categoria.total++;
+	id = Categoria.total;*/
+	
+	
 	//permite agregar ID a una nueva Cat.
 }// CONSTRUCTO CON PARAMETROS
 
 public Categoria() {
-	Categoria.total++;
-	id = Categoria.total;
+	/*Categoria.total++;
+	id = Categoria.total;*/
+	
+	
 }//CONSTRUCTOR VACIO
 
 @Override

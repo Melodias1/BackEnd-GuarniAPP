@@ -2,6 +2,7 @@ package org.generation.guarniapp.controller;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.guarniapp.model.Categoria;
 import org.generation.guarniapp.service.CategoriaService;
@@ -28,7 +29,7 @@ public CategoriaController(CategoriaService categoriaService) {
 	
 }
 @GetMapping
-public ArrayList<Categoria> getCategoria(){
+public List<Categoria> getCategoria(){
 	return categoriaService.getAllCategorias();
 }
 //se agregan los {} para los catId en los path de los metodos
@@ -44,6 +45,7 @@ public Categoria addCategoria(@RequestBody Categoria categoria) {
 public Categoria deleteCategoria(@PathVariable("catId")Long catId) {
 	return categoriaService.deleteCategoria(catId);
 }
+
 //se cambia @GetMapping por @PutMapping ya que causaba conflicto en la app ademas de qye  el metodo no cumpliria su funcion
 @PutMapping(path = "{catId}")
 public Categoria updateCategoria(@PathVariable("catId")Long catId,
