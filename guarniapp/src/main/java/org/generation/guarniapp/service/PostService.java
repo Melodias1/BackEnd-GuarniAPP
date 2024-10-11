@@ -27,7 +27,7 @@ public class PostService {
 		}//forEach
 		return p;
 	}//getPost
-	
+		
 	public Post addPost(Post post) {
 		lista.add(post);
 		return post;

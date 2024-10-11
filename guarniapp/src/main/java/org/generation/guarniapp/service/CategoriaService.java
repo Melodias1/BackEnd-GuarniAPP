@@ -20,11 +20,14 @@ public CategoriaService() {
 	public ArrayList<Categoria> getAllCategorias() {		
 		return lista;
 	}
+	//se agrega if para que el id cooincida con el id recibido y retornar solo ese id
 	public Categoria getCategoria(Long catId) {
 		Categoria cat=null;
 		for (Categoria categoria : lista) {
-			cat = categoria;
-			break;
+			if(categoria.getId()==catId) {
+				cat = categoria;
+				break;
+			}		
 		}
 		return cat;
 	}

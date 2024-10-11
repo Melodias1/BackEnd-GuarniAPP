@@ -32,7 +32,7 @@ public class UsuarioService {
 		
 		return usr;
 	}//getUsuario
-
+	//se agrega el user= usuario ya que retornaba null todo el tiempo
 	public Usuario addUsuario(Usuario usuario) {
 		Usuario user = null;
 		boolean flag = false;
@@ -44,6 +44,7 @@ public class UsuarioService {
 		}//for
 		if (!flag) {
 			lista.add(usuario);
+			user=usuario;
 		}
 		return user;
 	}//addUsuario
@@ -67,6 +68,7 @@ public class UsuarioService {
 				if (usuario.getPassword().equals(changePassword.getPassword())) {
 					usuario.setPassword(changePassword.getNewPassword());
 					aux=usuario;
+					
 				}
 				break;
 			}

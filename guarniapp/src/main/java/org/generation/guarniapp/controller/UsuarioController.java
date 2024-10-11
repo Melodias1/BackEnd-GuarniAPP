@@ -45,7 +45,7 @@ public class UsuarioController {
 	public Usuario deleteUsuario(@PathVariable("userId") Long Id) {
 		return usuarioService.deleteUsuario(Id);
 	}//deletUsuario
-	
+	//el body retorna blanco, pero aun no encuentro porque, hay que revisar mas a fondo
 	@PutMapping(path="{userId}")
 	public Usuario updateUsuario(@RequestBody ChangePassword changePassword,@PathVariable("userId") Long userId) {
 		return usuarioService.updateUsuario(userId,changePassword);

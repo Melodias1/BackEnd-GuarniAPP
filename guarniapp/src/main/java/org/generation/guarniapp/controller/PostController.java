@@ -36,7 +36,7 @@ public class PostController {
 	public Post getPost(@PathVariable("postId")Long postId) {
 		return postService.getProducto(postId);
 	}//getPost
-	
+	//creo que el tipo de dato de fecha tiene que ser en texto, o que se genere de forma automatica, de otra manera solo corre el metodo si el valor de date es null ya que no encontre forma de mandar el tipo de dato localtime desde el json
 	@PostMapping //https://localhost:8080/api/post/
 	public Post addPost(@RequestBody Post post) {
 		return postService.addPost(post);
@@ -46,7 +46,7 @@ public class PostController {
 	public Post deletePost(@PathVariable("prodId")Long postId) {
 		return postService.deletePost(postId);
 	}//deletePost
-	
+	//no encontre manera de que funcionara, creo que es por lo mismo que en metodo post, por el dato local time
 	@PutMapping (path = "{postId}") //https://localhost:8080/api/post/1
 	public Post updateProducto(@PathVariable("postId")Long postId,
 			@RequestParam(required=false)String postDescription,
