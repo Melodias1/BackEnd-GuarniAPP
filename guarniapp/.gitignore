@@ -4,11 +4,10 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-<<<<<<< HEAD
+!src/main/resources/
 /src/main/resources/application.properties
-=======
-src/main/resources/application.properties
->>>>>>> c67ca123cec2a52ed567c6cfb735b96682e31bd2
+
+
 
 ### STS ###
 .apt_generated
