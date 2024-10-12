@@ -21,7 +21,7 @@ public class PostService {
 	}//constructor
 	
 	public List<Post> getAllPosts() {
-		return postRerpository.findAll();
+		return postRepository.findAll();
 	}//getAllPosts
 	
 	public Post getPost(Long postId) {
@@ -32,11 +32,11 @@ public class PostService {
 	}//getPost
 		
 	public Post addPost(Post post) {
-		Optional <Post> p = postRepository.findByNombre(post.getTitle());
+		Optional <Post> p = postRepository.findByTitle(post.getPostTitle());
 		if (p.isEmpty()) {//No existe el nombre
 			return postRepository.save(post);	
 		}else{
-			System.out.println("El post [" + post.getTitle()
+			System.out.println("El post [" + post.getPostTitle()
 					+ "] ya se encuentra registrado");
 			return null;
 		}//if isEmpty
@@ -55,10 +55,10 @@ public class PostService {
 		Post p =null;
 		if(postRepository.existsById(postId)) {
 			Post post = postRepository.findById(postId).get();
-			if (postDescription != null) post.setDescription(postDescription);
-			if (postFile != null) post.setFile(postFile);
-			if (postDate != null) post.setDate(postDate);
-			if (postTitle != null) post.setTitle(postTitle);
+			if (postDescription != null) post.setPostDescription(postDescription);
+			if (postFile != null) post.setPostFile(postFile);
+			if (postDate != null) post.setPostDate(postDate);
+			if (postTitle != null) post.setPostTitle(postTitle);
 			postRepository.save(post);
 			p = post;
 		}//exist
