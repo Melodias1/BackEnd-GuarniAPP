@@ -1,8 +1,12 @@
 package org.generation.guarniapp.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.generation.guarniapp.model.Usuario;
+import org.generation.guarniapp.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.generation.guarniapp.dto.ChangePassword;
@@ -10,52 +14,45 @@ import org.generation.guarniapp.dto.ChangePassword;
 @Service
 public class UsuarioService {
 
-	private static final ArrayList<Usuario> lista = new ArrayList<Usuario>();
+//	private static final ArrayList<Usuario> lista = new ArrayList<Usuario>();
 	
-	public UsuarioService() {
-		lista.add(new Usuario("Manuel Estrada","mauel@gmail.com", "7223567890", "contrasena1"));
-		lista.add(new Usuario("Jose Jose","jose@gmail.com", "7223234567", "contrasena12"));
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	public final UsuarioRepository usuarioRepository;
+	
+	public UsuarioService(UsuarioRepository usuarioRepository) {
+//		lista.add(new Usuario("Manuel Estrada","mauel@gmail.com", "7223567890", "contrasena1"));
+//		lista.add(new Usuario("Jose Jose","jose@gmail.com", "7223234567", "contrasena12"));
+		this.usuarioRepository= usuarioRepository;
 	}//constructor
 	
-	public ArrayList<Usuario> getAllUusuario() {
-		return lista;
-	}//ArrayList
+	public List<Usuario> getAllUusuario() {
+		return usuarioRepository.findAll();
+	}//getUsuario
 	
 	public Usuario getUsuario(Long Id) {
-		Usuario usr=null;
-		for (Usuario usuario : lista) {
-			if (usuario.getId()==Id) {
-				usr=usuario;
-				break;
-			}
-		}
-		
-		return usr;
+		return usuarioRepository.findById(Id).orElseThrow(
+				()-> new IllegalArgumentException("El usuario con el id ["+
+						"] no existe")
+				);
 	}//getUsuario
-	//se agrega el user= usuario ya que retornaba null todo el tiempo
 	public Usuario addUsuario(Usuario usuario) {
-		Usuario user = null;
-		boolean flag = false;
-		for (Usuario u : lista) {
-			if (u.getEamil().equals(usuario.getEamil())) {//si el correo ya existe
-				flag = true;
-				break;
-			}
-		}//for
-		if (!flag) {
-			lista.add(usuario);
-			user=usuario;
+		Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEamil());
+		if (user.isEmpty()) {//No existe el email
+			usuario.setPassword(encoder.encode(usuario.getPassword()));
+			return usuarioRepository.save(usuario);
+		}else {
+			System.out.println("El email ["+usuario.getEamil()+"] ya se encuentra registrado");
+			return null;
 		}
-		return user;
 	}//addUsuario
 	
 	public Usuario deleteUsuario(Long Id) {
 		Usuario usr=null;
-		for (Usuario usuario : lista) {
-			if (usuario.getId()==Id) {
-				usr= lista.remove(lista.indexOf(usuario));
-				break;
-			}
+		if (usuarioRepository.existsById(Id)) {
+			usr= usuarioRepository.findById(Id).get();
+			usuarioRepository.deleteById(Id);
 		}
 		
 		return usr;
@@ -63,16 +60,16 @@ public class UsuarioService {
 	
 	public Usuario updateUsuario(Long userId, ChangePassword changePassword) {
 		Usuario aux= null;
-		for (Usuario usuario : lista) {
-			if (usuario.getId()==userId) {
-				if (usuario.getPassword().equals(changePassword.getPassword())) {
-					usuario.setPassword(changePassword.getNewPassword());
+			if (usuarioRepository.existsById(userId)) {
+				Usuario usuario = usuarioRepository.findById(userId).get();
+				if (encoder.matches(changePassword.getPassword(), usuario.getPassword())) {
+					usuario.setPassword(encoder.encode(changePassword.getNewPassword()));
+					usuarioRepository.save(usuario);
 					aux=usuario;
 					
 				}
-				break;
 			}
-		}
+		
 		return aux;
 	}//updateUsuario
 	
