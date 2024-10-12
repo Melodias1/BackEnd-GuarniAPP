@@ -1,15 +1,26 @@
 package org.generation.guarniapp.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="comments")
 public class Comment {
-	//PK
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id",nullable = true, unique = true)
 	private Long id;
+	@Column(nullable = true)
 	private String comentario;
 	//FK
 	private Long user_iduser;
 	//FK
 	private Long post_idpost;
 	private String date;
-	private static Long total = Long.valueOf(0);
+	
 	
 	
 	
@@ -21,8 +32,6 @@ public class Comment {
 		this.user_iduser = user_iduser;
 		this.post_idpost = post_idpost;
 		this.date = date;
-		Comment.total++;
-		this.id=total;
 		
 	}//constructor using fields
 	
@@ -30,8 +39,7 @@ public class Comment {
 	
 	
 	public Comment() {
-		Comment.total++;
-		this.id=total;
+	
 	}//empty contructor
 
 	

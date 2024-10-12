@@ -38,7 +38,7 @@ public class UsuarioService {
 				);
 	}//getUsuario
 	public Usuario addUsuario(Usuario usuario) {
-		Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEamil());
+		Optional<Usuario> user = usuarioRepository.findByEamil(usuario.getEamil());
 		if (user.isEmpty()) {//No existe el email
 			usuario.setPassword(encoder.encode(usuario.getPassword()));
 			return usuarioRepository.save(usuario);

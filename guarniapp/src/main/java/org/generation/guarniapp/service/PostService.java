@@ -32,7 +32,7 @@ public class PostService {
 	}//getPost
 		
 	public Post addPost(Post post) {
-		Optional <Post> p = postRepository.findByTitle(post.getPostTitle());
+		Optional <Post> p = postRepository.findByPostTitle(post.getPostTitle());
 		if (p.isEmpty()) {//No existe el nombre
 			return postRepository.save(post);	
 		}else{

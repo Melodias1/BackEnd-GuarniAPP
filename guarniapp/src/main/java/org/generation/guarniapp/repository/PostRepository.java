@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostRepository extends JpaRepository <Post, Long>{
-	Optional<Post> findByTitle(String title);
+	Optional<Post> findByPostTitle(String postTitle);
 	
 }// interface PostRepository
