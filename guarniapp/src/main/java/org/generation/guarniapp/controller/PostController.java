@@ -34,7 +34,7 @@ public class PostController {
 	
 	@GetMapping(path = "{postId}") //https://localhost:8080/api/post/1
 	public Post getPost(@PathVariable("postId")Long postId) {
-		return postService.getProducto(postId);
+		return postService.getPost(postId);
 	}//getPost
 	
 	//creo que el tipo de dato de fecha tiene que ser en texto, o que se genere de forma automatica, de otra manera solo corre el metodo si el valor de date es null ya que no encontre forma de mandar el tipo de dato localtime desde el json
