@@ -1,6 +1,7 @@
 package org.generation.guarniapp.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.guarniapp.model.Comment;
 import org.generation.guarniapp.service.Commentservice;
@@ -25,7 +26,7 @@ public class Commentcontroller {
 			this.commentService=commentService;
 		}//inicializacion de servicio
 		@GetMapping
-		public ArrayList<Comment> getAllComments() {
+		public List<Comment> getAllComments() {
 			
 			return commentService.getAllComments();
 			

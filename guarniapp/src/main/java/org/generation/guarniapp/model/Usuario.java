@@ -1,28 +1,44 @@
-	package org.generation.guarniapp.model;
+package org.generation.guarniapp.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user")
 public class Usuario {
 	//Propiedades
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
 	private Long id;
+	@Column(nullable=false)
 	private String full_name;
+	@Column(nullable=false)
 	private String eamil;
+	@Column(nullable=false)
 	private String phone;
+	@Column(nullable=false)
 	private String password;
 	
-	private static Long total=Long.valueOf(0);
+//	private static Long total=Long.valueOf(0);
 
 	public Usuario(String full_name, String eamil, String phone, String password) {
 		this.full_name = full_name;
 		this.eamil = eamil;
 		this.phone = phone;
 		this.password = password;
-		Usuario.total++;
-		id=Usuario.total;
+//		Usuario.total++;
+//		id=Usuario.total;
 	}//Constructor
 
 	//Getters and Setters
 	public Usuario() {
-		Usuario.total++;
-		id=Usuario.total;
+//		Usuario.total++;
+//		id=Usuario.total;
 	}//Constructor Vacio
 
 	public Long getId() {

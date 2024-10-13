@@ -2,12 +2,11 @@ package org.generation.guarniapp.repository;
 
 import java.util.Optional;
 
-import org.generation.guarniapp.model.Post;
+import org.generation.guarniapp.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PostRepository extends JpaRepository <Post, Long>{
-	Optional<Post> findByPostTitle(String postTitle);
-	
-}// interface PostRepository
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+	Optional<Usuario> findByEamil(String email);
+}

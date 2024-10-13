@@ -1,6 +1,6 @@
 package org.generation.guarniapp.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.generation.guarniapp.model.Usuario;
 import org.generation.guarniapp.service.UsuarioService;
@@ -27,7 +27,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping
-	public ArrayList<Usuario> getUsuario(){
+	public List<Usuario> getUsuario(){
 		return usuarioService.getAllUusuario();
 	}
 	
