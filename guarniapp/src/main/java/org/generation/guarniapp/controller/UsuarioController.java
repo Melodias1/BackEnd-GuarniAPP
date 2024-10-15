@@ -5,6 +5,7 @@ import java.util.List;
 import org.generation.guarniapp.model.Usuario;
 import org.generation.guarniapp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.generation.guarniapp.dto.ChangePassword;
 
 @RequestMapping(path="/api/usuarios/")
+@CrossOrigin(origins = "http://localhost:5000")
 @RestController
 public class UsuarioController {
 	private final UsuarioService usuarioService;

@@ -13,12 +13,12 @@ public class Usuario {
 	//Propiedades
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@Column(name="iduser", unique=true, nullable=false)
 	private Long id;
 	@Column(nullable=false)
 	private String full_name;
 	@Column(nullable=false)
-	private String eamil;
+	private String email;
 	@Column(nullable=false)
 	private String phone;
 	@Column(nullable=false)
@@ -28,7 +28,7 @@ public class Usuario {
 
 	public Usuario(String full_name, String eamil, String phone, String password) {
 		this.full_name = full_name;
-		this.eamil = eamil;
+		this.email = eamil;
 		this.phone = phone;
 		this.password = password;
 //		Usuario.total++;
@@ -57,12 +57,12 @@ public class Usuario {
 		this.full_name = full_name;
 	}
 
-	public String getEamil() {
-		return eamil;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEamil(String eamil) {
-		this.eamil = eamil;
+	public void setEmail(String eamil) {
+		this.email = eamil;
 	}
 
 	public String getPhone() {
@@ -84,7 +84,7 @@ public class Usuario {
 	//toString
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", full_name=" + full_name + ", eamil=" + eamil + ", phone=" + phone
+		return "Usuario [id=" + id + ", full_name=" + full_name + ", eamil=" + email + ", phone=" + phone
 				+ ", password=" + password + "]";
 	}
 	

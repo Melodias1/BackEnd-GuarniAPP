@@ -38,12 +38,12 @@ public class UsuarioService {
 				);
 	}//getUsuario
 	public Usuario addUsuario(Usuario usuario) {
-		Optional<Usuario> user = usuarioRepository.findByEamil(usuario.getEamil());
+		Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEmail());
 		if (user.isEmpty()) {//No existe el email
 			usuario.setPassword(encoder.encode(usuario.getPassword()));
 			return usuarioRepository.save(usuario);
 		}else {
-			System.out.println("El email ["+usuario.getEamil()+"] ya se encuentra registrado");
+			System.out.println("El email ["+usuario.getEmail()+"] ya se encuentra registrado");
 			return null;
 		}
 	}//addUsuario
