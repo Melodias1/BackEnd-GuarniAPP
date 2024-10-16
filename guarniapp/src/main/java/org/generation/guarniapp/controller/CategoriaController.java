@@ -7,6 +7,7 @@ import java.util.List;
 import org.generation.guarniapp.model.Categoria;
 import org.generation.guarniapp.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 //se cambia @Restadvicecontroller por @Restcontroller
 @RequestMapping(path="/api/categoria/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class CategoriaController {
 private final CategoriaService categoriaService;

@@ -12,7 +12,7 @@ public class Categoria {
 //Propiedades
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
-@Column(name="Id", unique=true, nullable=false)
+@Column(name="Idcategoria", unique=true, nullable=false)
 private Long id;
 
 
