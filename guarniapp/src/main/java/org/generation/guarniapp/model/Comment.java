@@ -19,70 +19,52 @@ public class Comment {
 	private String comentario;
 	private String date;
 	// Relación con Usuario (muchos comentarios pueden estar asociados a un usuario)
-    @ManyToOne
-    @JoinColumn(name="user_iduser", nullable = false)
-    private Usuario usuario;
- // Relación con Post (muchos comentarios pueden estar asociados a un post)
-    @ManyToOne
-    @JoinColumn(name="post_idpost", nullable = false)
-    private Post post;
+	private Long user_iduser;
+	// Relación con Post (muchos comentarios pueden estar asociados a un post)
+	private Long post_idpost;
 	
 	
 	
 	
+	public Comment(String comentario, String date, Long user_iduser, Long post_idpost) {
+		super();
+		this.comentario = comentario;
+		this.date = date;
+		this.user_iduser = user_iduser;
+		this.post_idpost = post_idpost;
+	}
+
+
+	public Long getUser_iduser() {
+		return user_iduser;
+	}
+
+
+	public void setUser_iduser(Long user_iduser) {
+		this.user_iduser = user_iduser;
+	}
+
+
+
+
+	public Long getPost_idpost() {
+		return post_idpost;
+	}
+
+
+	public void setPost_idpost(Long post_idpost) {
+		this.post_idpost = post_idpost;
+	}
+
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", comentario=" + comentario + ", date=" + date + ", usuario=" + usuario
-				+ ", post=" + post + "]";
+		return "Comment [id=" + id + ", comentario=" + comentario + ", date=" + date + ", usuario=" 
+				+ ", post=" + "]";
 	}
-
-
-
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-
-
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-
-
-
-	public Post getPost() {
-		return post;
-	}
-
-
-
-
-	public void setPost(Post post) {
-		this.post = post;
-	}
-
-
-
-
-	public Comment(String comentario, String date) {
-		
-		this.comentario = comentario;
-		
-		this.date = date;
-		
-	}//constructor using fields
-	
-	
-	
 	
 	public Comment() {
 	
 	}//empty contructor
-
-	
 
 
 	public Long getId() {
