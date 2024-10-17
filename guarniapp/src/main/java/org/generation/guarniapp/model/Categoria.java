@@ -1,9 +1,15 @@
 package org.generation.guarniapp.model;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name="categoria")
@@ -14,15 +20,25 @@ public class Categoria {
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 @Column(name="Idcategoria", unique=true, nullable=false)
 private Long id;
-
-
 @Column(nullable=false)
 private String categoria;
 @Column(nullable=false)
 private String marcas;
 
+@OneToMany(cascade = CascadeType.ALL)
+@JoinColumn(name="categoria_idcategoria", referencedColumnName = "idcategoria")
+private List<Post> post = new ArrayList<Post>();
+
 //private static Long total = Long.valueOf(0);
 
+
+public void setPost(List<Post> post) {
+	this.post = post;
+}
+
+public List<Post> getPost() {
+	return post;
+}
 
 public Long getId() {
 	return id;

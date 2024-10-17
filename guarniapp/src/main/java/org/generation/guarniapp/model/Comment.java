@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="comments")
@@ -15,22 +17,60 @@ public class Comment {
 	private Long id;
 	@Column(nullable = true)
 	private String comentario;
-	//FK
-	private Long user_iduser;
-	//FK
-	private Long post_idpost;
 	private String date;
+	// Relación con Usuario (muchos comentarios pueden estar asociados a un usuario)
+    @ManyToOne
+    @JoinColumn(name="user_iduser", nullable = false)
+    private Usuario usuario;
+ // Relación con Post (muchos comentarios pueden estar asociados a un post)
+    @ManyToOne
+    @JoinColumn(name="post_idpost", nullable = false)
+    private Post post;
 	
 	
 	
 	
-	
-	
-	public Comment(String comentario, Long user_iduser, Long post_idpost, String date) {
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", comentario=" + comentario + ", date=" + date + ", usuario=" + usuario
+				+ ", post=" + post + "]";
+	}
+
+
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+
+
+	public Post getPost() {
+		return post;
+	}
+
+
+
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+
+
+
+	public Comment(String comentario, String date) {
 		
 		this.comentario = comentario;
-		this.user_iduser = user_iduser;
-		this.post_idpost = post_idpost;
+		
 		this.date = date;
 		
 	}//constructor using fields
@@ -59,18 +99,7 @@ public class Comment {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}//setComentarop
-	public Long getUser_iduser() {
-		return user_iduser;
-	}//getUserId
-	public void setUser_iduser(Long user_iduser) {
-		this.user_iduser = user_iduser;
-	}//setUserId
-	public Long getPost_idpost() {
-		return post_idpost;
-	}//getIdPost
-	public void setPost_idpost(Long post_idpost) {
-		this.post_idpost = post_idpost;
-	}//setIdPost
+	
 	public String getDate() {
 		return date;
 	}//getDate
@@ -81,11 +110,7 @@ public class Comment {
 
 
 
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", comentario=" + comentario + ", user_iduser=" + user_iduser + ", post_idpost="
-				+ post_idpost + ", date=" + date + "]";
-	}//Tostring
+
 	
 	
 	

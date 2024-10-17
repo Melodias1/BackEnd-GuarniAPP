@@ -42,7 +42,7 @@ public class PostController {
 	//creo que el tipo de dato de fecha tiene que ser en texto, o que se genere de forma automatica, de otra manera solo corre el metodo si el valor de date es null ya que no encontre forma de mandar el tipo de dato localtime desde el json
 	@PostMapping //https://localhost:8080/api/post/
 	public Post addPost(@RequestBody Post post) {
-		return postService.addPost(post);
+		return postService.addPost(post, null, null);
 	}//addPost
 	
 	@DeleteMapping(path = "{postId}") //https://localhost:8080/api/post/1
