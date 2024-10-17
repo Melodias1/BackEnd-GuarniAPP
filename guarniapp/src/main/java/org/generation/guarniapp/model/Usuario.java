@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name="user")
 public class Usuario {
@@ -31,22 +29,11 @@ public class Usuario {
 	private String phone;
 	@Column(nullable=false)
 	private String password;
-<<<<<<< HEAD
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_iduser", referencedColumnName="iduser")
-	private List<Post> posts = new ArrayList<>();
-	    // Relación con Comment
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Comment> comments = new ArrayList<>();
-=======
-	
     // Relación con Comment
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_iduser", referencedColumnName = "iduser")
 	List<Comment> comment = new ArrayList<Comment>();
 	//relacion con Post
-
->>>>>>> 1873a5270ff99bf2fde36c2a30ceaf7d65dad850
 
 	
 

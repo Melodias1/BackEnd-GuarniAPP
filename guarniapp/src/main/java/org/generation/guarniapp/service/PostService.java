@@ -33,11 +33,6 @@ public class PostService {
 	public Post addPost(Post post) {
 		Optional <Post> p = postRepository.findByPostTitle(post.getPostTitle());
 		if (p.isEmpty()) {//No existe el nombre
-<<<<<<< HEAD
-=======
-			// Buscar el usuario y la categoría
- 
->>>>>>> 1873a5270ff99bf2fde36c2a30ceaf7d65dad850
             return postRepository.save(post);
 		}else{
 			System.out.println("El post [" + post.getPostTitle()

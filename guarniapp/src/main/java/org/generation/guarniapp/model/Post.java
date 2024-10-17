@@ -13,9 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "publicaciones")
 public class Post {
@@ -28,34 +25,14 @@ public class Post {
 	private String postDate;
 	@Column(nullable=false)
 	private String postTitle;
-<<<<<<< HEAD
 	private Long user_iduser;
 	private Long categoria_idcategoria;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="comment_id", referencedColumnName="id")
-	List<Comment> comment = new ArrayList<Comment>();
-
-	public Post(Long id, String postDescription, String postFile, String postDate, String postTitle) {
-		this.id = id;
-=======
-	
 	// Relación con Comment (un post puede tener muchos comentarios)
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_idpost", referencedColumnName = "idpost")
 	List<Comment> comment = new ArrayList<Comment>();
 
-	
-	public List<Comment> getComment() {
-		return comment;
-	}
-
-	public void setComment(List<Comment> comment) {
-		this.comment = comment;
-	}
-
 	public Post(String postDescription, String postFile, String postDate, String postTitle) {
-		
->>>>>>> 1873a5270ff99bf2fde36c2a30ceaf7d65dad850
 		this.postDescription = postDescription;
 		this.postFile = postFile;
 		this.postDate = postDate;
