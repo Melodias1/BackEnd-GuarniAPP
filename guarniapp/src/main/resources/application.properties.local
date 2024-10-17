@@ -1,0 +1,8 @@
+spring.application.name=guarniapp
+#informacion para conectarse al servidor
+spring.datasource.url=jdbc:mysql://localhost:3306/guarniapp
+spring.datasource.username=root
+spring.datasource.password=Luna2515-
+
+#create, create-drop, validate: cuando se sube a produccion para que nada mas valide y no modifique los datos , update
+spring.jpa.hibernate.ddl-auto=update

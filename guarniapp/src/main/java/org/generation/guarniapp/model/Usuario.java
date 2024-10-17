@@ -1,10 +1,16 @@
 package org.generation.guarniapp.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +29,16 @@ public class Usuario {
 	private String phone;
 	@Column(nullable=false)
 	private String password;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Post> posts = new ArrayList<>();
+	    // Relación con Comment
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<>();
+
 	
 //	private static Long total=Long.valueOf(0);
+
+	
 
 	public Usuario(String full_name, String eamil, String phone, String password) {
 		this.full_name = full_name;
@@ -34,6 +48,22 @@ public class Usuario {
 //		Usuario.total++;
 //		id=Usuario.total;
 	}//Constructor
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 	//Getters and Setters
 	public Usuario() {
