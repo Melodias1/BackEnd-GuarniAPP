@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "publicaciones")
 public class Post {
@@ -27,39 +30,20 @@ public class Post {
 	@Column(nullable=false)
 	private String postDate;
 	private String postTitle;
-	@ManyToOne
-	@JoinColumn(name = "user_iduser")  // Hibernate creará la columna en la tabla Post
-	private Usuario usuario;
-	@ManyToOne
-	@JoinColumn(name = "categoria_idcategoria")  // Hibernate creará la columna en la tabla Post
-	private Categoria categoria;
+	
 	// Relación con Comment (un post puede tener muchos comentarios)
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-	private List<Comment> comment = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "post_idpost", referencedColumnName = "idpost")
+	List<Comment> comment = new ArrayList<Comment>();
 
-	public Usuario getUsuario() {
-			return usuario;
-		}
+	
+	public List<Comment> getComment() {
+		return comment;
+	}
 
-		public void setUsuario(Usuario usuario) {
-			this.usuario = usuario;
-		}
-
-		public Categoria getCategoria() {
-			return categoria;
-		}
-
-		public void setCategoria(Categoria categoria) {
-			this.categoria = categoria;
-		}
-
-		public List<Comment> getComment() {
-			return comment;
-		}
-
-		public void setComment(List<Comment> comment) {
-			this.comment = comment;
-		}
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
 
 	public Post(String postDescription, String postFile, String postDate, String postTitle) {
 		

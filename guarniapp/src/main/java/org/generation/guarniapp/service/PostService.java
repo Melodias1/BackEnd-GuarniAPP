@@ -44,20 +44,11 @@ public class PostService {
 				);
 	}//getPost
 		
-	public Post addPost(Post post, Long userId, Long categoriaId) {
+	public Post addPost(Post post) {
 		Optional <Post> p = postRepository.findByPostTitle(post.getPostTitle());
 		if (p.isEmpty()) {//No existe el nombre
 			// Buscar el usuario y la categoría
-            Usuario usuario = usuarioRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("El usuario con id [" + userId + "] no existe")
-            );
-            Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(
-                () -> new IllegalArgumentException("La categoría con id [" + categoriaId + "] no existe")
-            );
-            // Asignar usuario y categoría al post
-            post.setUsuario(usuario);
-            post.setCategoria(categoria);
-
+ 
             return postRepository.save(post);
 		}else{
 			System.out.println("El post [" + post.getPostTitle()

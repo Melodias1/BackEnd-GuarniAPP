@@ -43,27 +43,10 @@ public class Commentservice {
 				);
 	}//get Comment
 
-	public Comment addComment(Comment comment, Long postId,Long userId) {
-		Optional<Comment> existingComment = commentRepository.findByComentario(comment.getComentario());
-        if (existingComment.isEmpty()) {
-            // Buscar el usuario y el post relacionados
-            Usuario usuario = usuarioRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("El usuario con id [" + userId + "] no existe")
-            );
-            Post post = postRepository.findById(postId).orElseThrow(
-                () -> new IllegalArgumentException("El post con id [" + postId + "] no existe")
-            );
-
-            // Asignar el usuario y el post al comentario
-            comment.setUsuario(usuario);
-            comment.setPost(post);
-
+	public Comment addComment(Comment comment) {
             commentRepository.save(comment);
             return comment;
-        } else {
-            System.out.println("El comentario [" + comment.getComentario() + "] ya fue realizado, no se permite hacer spam.");
-            return null;
-        }
+      
     }
 	public Comment deleteComment(Long commentId) {
 		Comment com=null;

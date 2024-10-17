@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="user")
 public class Usuario {
@@ -29,16 +31,26 @@ public class Usuario {
 	private String phone;
 	@Column(nullable=false)
 	private String password;
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Post> posts = new ArrayList<>();
-	    // Relación con Comment
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Comment> comments = new ArrayList<>();
+	
+    // Relación con Comment
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_iduser", referencedColumnName = "iduser")
+	List<Comment> comment = new ArrayList<Comment>();
+	//relacion con Post
+
 
 	
-//	private static Long total=Long.valueOf(0);
+
 
 	
+
+	public List<Comment> getComment() {
+			return comment;
+		}
+
+		public void setComment(List<Comment> comment) {
+			this.comment = comment;
+		}
 
 	public Usuario(String full_name, String eamil, String phone, String password) {
 		this.full_name = full_name;
@@ -49,22 +61,7 @@ public class Usuario {
 //		id=Usuario.total;
 	}//Constructor
 
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
+	
 	//Getters and Setters
 	public Usuario() {
 //		Usuario.total++;
