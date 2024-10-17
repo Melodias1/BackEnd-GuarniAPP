@@ -75,14 +75,20 @@ public class PostService {
 		return p;
 	}//deletePost
 	
-	public Post updatePost(Long postId, String postDescription, String postFile, String postDate, String postTitle) {
+	public Post updatePost(Long postId,Post newPost) {
 		Post p =null;
 		if(postRepository.existsById(postId)) {
 			Post post = postRepository.findById(postId).get();
-			if (postDescription != null) post.setPostDescription(postDescription);
-			if (postFile != null) post.setPostFile(postFile);
-			if (postDate != null) post.setPostDate(postDate);
-			if (postTitle != null) post.setPostTitle(postTitle);
+			if (newPost.getPostDescription() != null) post.setPostDescription(newPost.getPostDescription());
+			if (newPost.getPostFile() != null) post.setPostFile(newPost.getPostFile());
+			if (newPost.getPostDate() != null) post.setPostDate(newPost.getPostDate());
+			if (newPost.getPostTitle() != null) post.setPostTitle(newPost.getPostTitle());
+//			 if (newPost.getCategoria() != null) {
+//	                Categoria categoria = categoriaRepository.findById(newPost.getCategoria()).orElseThrow(
+//	                    () -> new IllegalArgumentException("La categoría con id [" + categoriaId + "] no existe")
+//	                );
+//	                post.setCategoria(categoria);
+//	            }
 			postRepository.save(post);
 			p = post;
 		}//exist
