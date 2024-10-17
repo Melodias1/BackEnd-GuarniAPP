@@ -62,7 +62,7 @@ public class Post {
 		}
 
 	public Post(String postDescription, String postFile, String postDate, String postTitle) {
-		super();
+		
 		this.postDescription = postDescription;
 		this.postFile = postFile;
 		this.postDate = postDate;

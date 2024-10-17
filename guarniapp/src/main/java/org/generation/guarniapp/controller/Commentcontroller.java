@@ -39,8 +39,8 @@ public class Commentcontroller {
 			return commentService.getComment(commentId);
 		}//getcomment
 		@PostMapping
-		public Comment addComment(@RequestBody Comment comment) {
-			return commentService.addComment(comment);
+		public Comment addComment(@RequestBody Comment comment,@RequestParam Long userId,@RequestParam Long postId) {
+			return commentService.addComment(comment, userId, postId);
 		}//add
 		@DeleteMapping(path="{commentId}")
 		public Comment deleteComment(@PathVariable("commentId")Long commentId) {

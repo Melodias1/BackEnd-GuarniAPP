@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostController {
 	
 	private final PostService postService;
+	
 
 	@Autowired
 	public PostController(PostService postService) {
@@ -41,8 +42,8 @@ public class PostController {
 	
 	//creo que el tipo de dato de fecha tiene que ser en texto, o que se genere de forma automatica, de otra manera solo corre el metodo si el valor de date es null ya que no encontre forma de mandar el tipo de dato localtime desde el json
 	@PostMapping //https://localhost:8080/api/post/
-	public Post addPost(@RequestBody Post post) {
-		return postService.addPost(post, null, null);
+	public Post addPost(@RequestBody Post post,@RequestParam Long userId,@RequestParam Long postId) {
+		return postService.addPost(post, userId, postId);
 	}//addPost
 	
 	@DeleteMapping(path = "{postId}") //https://localhost:8080/api/post/1
@@ -51,13 +52,8 @@ public class PostController {
 	}//deletePost
 	//no encontre manera de que funcionara, creo que es por lo mismo que en metodo post, por el dato local time
 	@PutMapping (path = "{postId}") //https://localhost:8080/api/post/1
-	public Post updatePost(@PathVariable("postId")Long postId,
-			@RequestParam(required=false)String postDescription,
-			@RequestParam(required=false)String postFile,
-			@RequestParam(required=false)String postDate,
-			@RequestParam(required=false)String postTitle
-			) {
-		return postService.updatePost(postId, postDescription, postFile, postDate, postTitle);
+	public Post updatePost(@PathVariable("postId")Long postId,@RequestBody Post post) {
+		return postService.updatePost(postId, post);
 	}//updatePost
 	
 	

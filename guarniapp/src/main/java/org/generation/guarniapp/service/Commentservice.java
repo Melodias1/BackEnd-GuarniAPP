@@ -6,19 +6,26 @@ import java.util.List;
 import java.util.Optional;
 
 import org.generation.guarniapp.model.Comment;
+import org.generation.guarniapp.model.Post;
+import org.generation.guarniapp.model.Usuario;
 import org.generation.guarniapp.repository.CommentRepository;
+import org.generation.guarniapp.repository.PostRepository;
+import org.generation.guarniapp.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
 public class Commentservice {
 	//inicializacion de la lista de objetos Comment, es fianl y static ya que no debe de cambiar y solo se debe acceder atravez de la clase
-	CommentRepository commentRepository;
-	
+	private final CommentRepository commentRepository;
+	private final UsuarioRepository usuarioRepository;
+	private final PostRepository postRepository;
 	
 	//construccion de la lista con el constructor vacio
 	@Autowired
-	private Commentservice(CommentRepository commentRepository) {
+	private Commentservice(CommentRepository commentRepository,UsuarioRepository usuarioRepository, PostRepository postRepository) {
 		this.commentRepository= commentRepository;
+		this.usuarioRepository=usuarioRepository;
+		this.postRepository=postRepository;		
 	}
 		
 //metodo para retornal todos los comentarios
@@ -36,19 +43,28 @@ public class Commentservice {
 				);
 	}//get Comment
 
-	public Comment addComment(Comment comment) {
-		Optional<Comment> com= commentRepository.findByComentario(comment.getComentario());
-			if(com.isEmpty()) {
-				commentRepository.save(comment);
-				return comment;
-			}else {
-				System.out.println("el commentario ["
-						+comment.getComentario() +"] ya fue realizado,no se permite hacer spam");
-			}
-		
-		return null;
-	}//add
+	public Comment addComment(Comment comment, Long postId,Long userId) {
+		Optional<Comment> existingComment = commentRepository.findByComentario(comment.getComentario());
+        if (existingComment.isEmpty()) {
+            // Buscar el usuario y el post relacionados
+            Usuario usuario = usuarioRepository.findById(userId).orElseThrow(
+                () -> new IllegalArgumentException("El usuario con id [" + userId + "] no existe")
+            );
+            Post post = postRepository.findById(postId).orElseThrow(
+                () -> new IllegalArgumentException("El post con id [" + postId + "] no existe")
+            );
 
+            // Asignar el usuario y el post al comentario
+            comment.setUsuario(usuario);
+            comment.setPost(post);
+
+            commentRepository.save(comment);
+            return comment;
+        } else {
+            System.out.println("El comentario [" + comment.getComentario() + "] ya fue realizado, no se permite hacer spam.");
+            return null;
+        }
+    }
 	public Comment deleteComment(Long commentId) {
 		Comment com=null;
 		if(commentRepository.existsById(commentId)) {
