@@ -1,6 +1,5 @@
 package org.generation.guarniapp.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,45 +22,17 @@ public class Post {
 	private Long id;
 	private String postDescription;
 	private String postFile;
-	@Column(nullable=false)
 	private String postDate;
+	@Column(nullable=false)
 	private String postTitle;
-	@ManyToOne
-	@JoinColumn(name = "user_iduser")  // Hibernate creará la columna en la tabla Post
-	private Usuario usuario;
-	@ManyToOne
-	@JoinColumn(name = "categoria_idcategoria")  // Hibernate creará la columna en la tabla Post
-	private Categoria categoria;
-	// Relación con Comment (un post puede tener muchos comentarios)
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-	private List<Comment> comment = new ArrayList<>();
+	private Long user_iduser;
+	private Long categoria_idcategoria;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="comment_id", referencedColumnName="id")
+	List<Comment> comment = new ArrayList<Comment>();
 
-	public Usuario getUsuario() {
-			return usuario;
-		}
-
-		public void setUsuario(Usuario usuario) {
-			this.usuario = usuario;
-		}
-
-		public Categoria getCategoria() {
-			return categoria;
-		}
-
-		public void setCategoria(Categoria categoria) {
-			this.categoria = categoria;
-		}
-
-		public List<Comment> getComment() {
-			return comment;
-		}
-
-		public void setComment(List<Comment> comment) {
-			this.comment = comment;
-		}
-
-	public Post(String postDescription, String postFile, String postDate, String postTitle) {
-		
+	public Post(Long id, String postDescription, String postFile, String postDate, String postTitle) {
+		this.id = id;
 		this.postDescription = postDescription;
 		this.postFile = postFile;
 		this.postDate = postDate;
@@ -70,6 +40,30 @@ public class Post {
 	}//Constructor
 	
 	public Post() {}//Constructor vacio
+
+	public Long getUser_iduser() {
+		return user_iduser;
+	}
+
+	public void setUser_iduser(Long user_iduser) {
+		this.user_iduser = user_iduser;
+	}
+
+	public Long getCategoria_idcategoria() {
+		return categoria_idcategoria;
+	}
+
+	public void setCategoria_idcategoria(Long categoria_idcategoria) {
+		this.categoria_idcategoria = categoria_idcategoria;
+	}
+
+	public List<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
 
 	public Long getId() {
 		return id;

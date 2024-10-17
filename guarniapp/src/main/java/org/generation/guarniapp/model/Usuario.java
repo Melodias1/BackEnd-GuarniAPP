@@ -29,7 +29,8 @@ public class Usuario {
 	private String phone;
 	@Column(nullable=false)
 	private String password;
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_iduser", referencedColumnName="iduser")
 	private List<Post> posts = new ArrayList<>();
 	    // Relación con Comment
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
