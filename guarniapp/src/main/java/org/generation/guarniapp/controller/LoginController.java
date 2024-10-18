@@ -31,14 +31,19 @@ public class LoginController {
 	
 	@PostMapping
 	public ResponseEntity<Login> loginUser(@RequestBody Usuario usuario) throws ServletException {
-		Usuario user = usuarioService.validateUser(usuario);
-		if (user!=null) {
-			System.out.println("Usuario valido" + usuario.getEmail());
-			Token token = new Token(generateToken(usuario.getEmail()));
-			return ResponseEntity.ok(new Login(token, usuario));
-		}
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+	    Usuario user = usuarioService.validateUser(usuario);
+	    if (user != null) {
+	        System.out.println("Usuario válido: " + user.getEmail());
+
+	        Token token = new Token(generateToken(user.getEmail()));
+	        //Retorna null en los parametros
+	        user.setPassword(null);
+	        user.setPhone(null);
+	        return ResponseEntity.ok(new Login(token, user));  
+	    }
+	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 	}
+
 	
 	private String generateToken(String email) {
 		Calendar calendar = Calendar.getInstance();
