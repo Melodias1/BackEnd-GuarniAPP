@@ -37,7 +37,7 @@ public class Usuario {
 	@JoinColumn(name = "user_iduser", referencedColumnName = "iduser")
 	List<Comment> comment = new ArrayList<Comment>();
 	//relacion con Post
-
+	
 
 	
 

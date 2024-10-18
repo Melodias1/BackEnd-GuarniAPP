@@ -30,12 +30,12 @@ public class Post {
 	@Column(nullable=false)
 	private String postDate;
 	private String postTitle;
-	
+	private Long categoria_idcategoria;
 	// Relación con Comment (un post puede tener muchos comentarios)
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_idpost", referencedColumnName = "idpost")
 	List<Comment> comment = new ArrayList<Comment>();
-
+	
 	
 	public List<Comment> getComment() {
 		return comment;
