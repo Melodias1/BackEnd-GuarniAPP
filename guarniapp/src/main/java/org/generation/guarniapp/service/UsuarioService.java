@@ -74,15 +74,19 @@ public class UsuarioService {
 	}//updateUsuario
 	
 	public Usuario validateUser(Usuario usuario) {
-		Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEmail());
-		if (user.isEmpty()) {
-			return null;
-		}
-		if (encoder.matches(usuario.getPassword(), user.get().getPassword())) {
-			return user.get();
-		}
-		return null;
+	    Optional<Usuario> userOptional = usuarioRepository.findByEmail(usuario.getEmail());
+	    if (userOptional.isPresent()) {
+	        Usuario user = userOptional.get();
+	        if (encoder.matches(usuario.getPassword(), user.getPassword())) {
+	            return user;  
+	        } else {
+	            System.out.println("Contraseña o usuario incorrecta");
+	        }
+	    }
+
+	    return null;
 	}
+
 	
 
 }
