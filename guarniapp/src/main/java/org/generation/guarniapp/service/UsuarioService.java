@@ -20,7 +20,7 @@ public class UsuarioService {
 	private PasswordEncoder encoder;
 	
 	public final UsuarioRepository usuarioRepository;
-	
+	@Autowired
 	public UsuarioService(UsuarioRepository usuarioRepository) {
 //		lista.add(new Usuario("Manuel Estrada","mauel@gmail.com", "7223567890", "contrasena1"));
 //		lista.add(new Usuario("Jose Jose","jose@gmail.com", "7223234567", "contrasena12"));
@@ -72,6 +72,17 @@ public class UsuarioService {
 		
 		return aux;
 	}//updateUsuario
+	
+	public Usuario validateUser(Usuario usuario) {
+		Optional<Usuario> user = usuarioRepository.findByEmail(usuario.getEmail());
+		if (user.isEmpty()) {
+			return null;
+		}
+		if (encoder.matches(usuario.getPassword(), user.get().getPassword())) {
+			return user.get();
+		}
+		return null;
+	}
 	
 
 }
