@@ -26,11 +26,17 @@ public class Post {
 	@Column(nullable=false)
 	private String postTitle;
 	private Long user_iduser;
+
 	private Long categoria_idcategoria;
 	// Relación con Comment (un post puede tener muchos comentarios)
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_idpost", referencedColumnName = "idpost")
 	List<Comment> comment = new ArrayList<Comment>();
+	
+
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
 
 	public Post(String postDescription, String postFile, String postDate, String postTitle) {
 		this.postDescription = postDescription;
@@ -59,10 +65,6 @@ public class Post {
 
 	public List<Comment> getComment() {
 		return comment;
-	}
-
-	public void setComment(List<Comment> comment) {
-		this.comment = comment;
 	}
 
 	public Long getId() {

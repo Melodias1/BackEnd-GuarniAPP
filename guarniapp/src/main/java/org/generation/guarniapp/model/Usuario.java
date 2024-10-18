@@ -35,11 +35,6 @@ public class Usuario {
 	List<Comment> comment = new ArrayList<Comment>();
 	//relacion con Post
 
-	
-
-
-	
-
 	public List<Comment> getComment() {
 			return comment;
 		}
